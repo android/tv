@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.ui.focus.FocusRequester
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -22,6 +23,8 @@ import com.google.tv.material.catalog.screens.WorkInProgressScreen
 
 @Composable
 fun NavigationGraph(
+    themeFocus: FocusRequester,
+    fontFocus: FocusRequester,
     onThemeColorModeClick: () -> Unit,
     onFontScaleClick: () -> Unit
 ) {
@@ -31,6 +34,7 @@ fun NavigationGraph(
             composable(destination.routeName) {
                 destination.composable {
                     AppBar(
+                        themeFocus, fontFocus,
                         onThemeColorModeClick = onThemeColorModeClick,
                         onFontScaleClick = onFontScaleClick
                     )
@@ -147,12 +151,6 @@ enum class NavGraph(
             }
         }
     ),
-    NavigationDrawer(
-        routeName = "nav-drawer",
-        composable = {
-            WorkInProgressScreen()
-        }
-    ),
     TabRow(
         routeName = "tab-row",
         composable = { appBar ->
@@ -160,6 +158,12 @@ enum class NavGraph(
                 appBar()
                 TabRowScreen()
             }
+        }
+    ),
+    NavigationDrawer(
+        routeName = "nav-drawer",
+        composable = {
+            WorkInProgressScreen()
         }
     ),
     ModalDialog(

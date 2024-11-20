@@ -1,12 +1,14 @@
 package com.google.tv.material.catalog
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.focusGroup
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -14,6 +16,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -22,13 +26,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.tv.material3.Button
-import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Icon
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
 
 @Composable
 fun AppBar(
+    themeFocus: FocusRequester,
+    fontFocus: FocusRequester,
     onThemeColorModeClick: () -> Unit,
     onFontScaleClick: () -> Unit
 ) {
@@ -58,13 +63,13 @@ fun AppBar(
             isMainIconMagnified = isMainIconMagnified
         )
         Actions(
+            themeFocus, fontFocus,
             onThemeColorModeClick = onThemeColorModeClick,
-            onFontScaleClick = onFontScaleClick,
+            onFontScaleClick = onFontScaleClick
         )
     }
 }
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 private fun HeadlineContent(
     title: String,
@@ -72,6 +77,7 @@ private fun HeadlineContent(
     isMainIconMagnified: Boolean,
 ) {
     Row(
+        modifier = Modifier.height(64.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -110,9 +116,10 @@ private fun HeadlineContent(
     }
 }
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 private fun Actions(
+    themeFocus: FocusRequester,
+    fontFocus: FocusRequester,
     onThemeColorModeClick: () -> Unit,
     onFontScaleClick: () -> Unit,
 ) {
@@ -120,18 +127,28 @@ private fun Actions(
         Action(
             iconPainter = painterResource(id = R.drawable.ic_palette),
             text = "Theme & color mode",
-            onClick = onThemeColorModeClick
+            onClick = onThemeColorModeClick,
+            focusRequester = themeFocus
         ),
         Action(
             iconPainter = painterResource(id = R.drawable.ic_font),
             text = "Font scale",
-            onClick = onFontScaleClick
+            onClick = onFontScaleClick,
+            focusRequester = fontFocus
         )
     )
 
-    Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        modifier = Modifier
+            .padding(end = 8.dp)
+            .focusGroup()
+    ) {
         actions.forEach {
-            Button(onClick = it.onClick) {
+            Button(
+                modifier = Modifier.focusRequester(it.focusRequester),
+                onClick = it.onClick
+            ) {
                 Icon(
                     modifier = Modifier.size(16.dp),
                     painter = it.iconPainter,
@@ -151,4 +168,5 @@ private data class Action(
     val iconPainter: Painter,
     val text: String,
     val onClick: () -> Unit,
+    val focusRequester: FocusRequester
 )

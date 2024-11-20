@@ -9,17 +9,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.LayoutDirection
-import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Surface
 import com.google.tv.material.catalog.colorutils.Scheme.Companion.dark
 import com.google.tv.material.catalog.colorutils.Scheme.Companion.light
 import com.google.tv.material.catalog.colorutils.toColorScheme
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun App() {
     var themeMode by remember { mutableStateOf(Mode.Dark) }
@@ -40,15 +39,23 @@ fun App() {
         fontScale = fontScale,
     ) {
         MaterialTheme(colorScheme = colorScheme.toColorScheme()) {
+            val themeFocus = remember { FocusRequester() }
+            val fontFocus = remember { FocusRequester() }
             ThemeAndColorModeSelector(
                 isExpanded = isThemeSelectorExpanded,
-                onClose = { isThemeSelectorExpanded = false },
+                onClose = {
+                    isThemeSelectorExpanded = false
+                    themeFocus.requestFocus()
+                },
                 onSeedColorChange = { seedColor = it },
                 onThemeModeChange = { themeMode = it },
             ) {
                 FontScaleAndLayoutDirectionSelector(
                     isExpanded = isFontScaleSelectorExpanded,
-                    onClose = { isFontScaleSelectorExpanded = false },
+                    onClose = {
+                        isFontScaleSelectorExpanded = false
+                        fontFocus.requestFocus()
+                    },
                     onLayoutDirectionChange = { layoutDirection = it },
                     onFontScaleChange = { fontScale = it }
                 ) {
@@ -58,6 +65,7 @@ fun App() {
                     ) {
                         Column(Modifier.fillMaxSize()) {
                             NavigationGraph(
+                                themeFocus, fontFocus,
                                 onThemeColorModeClick = {
                                     isThemeSelectorExpanded = true
                                 },

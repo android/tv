@@ -15,7 +15,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.tv.material3.DenseListItem
-import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Icon
 import androidx.tv.material3.ListItem
 import androidx.tv.material3.ListItemDefaults
@@ -23,7 +22,6 @@ import androidx.tv.material3.Text
 import com.google.tv.material.catalog.ExampleAction
 import com.google.tv.material.catalog.ExamplesScreenWithDottedBackground
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun ListsScreen() {
     val actions = listOf(

@@ -113,7 +113,6 @@ fun ChipsScreen() {
     ExamplesScreenWithDottedBackground(actions)
 }
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 private val editIcon = @Composable {
     Icon(
         imageVector = Icons.Default.Edit,
@@ -121,7 +120,6 @@ private val editIcon = @Composable {
     )
 }
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 private val checkIcon = @Composable {
     Icon(
         imageVector = Icons.Default.Check,
@@ -129,7 +127,6 @@ private val checkIcon = @Composable {
     )
 }
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 private val clearIcon = @Composable {
     Icon(
         imageVector = Icons.Default.Clear,

@@ -23,7 +23,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Tab
 import androidx.tv.material3.TabDefaults
@@ -60,7 +59,6 @@ fun TabRowScreen() {
     ExamplesScreenWithDottedBackground(actions)
 }
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 private fun PillIndicatorTabRow() {
     var selectedTabIndex by remember { mutableIntStateOf(0) }
@@ -89,7 +87,6 @@ private fun PillIndicatorTabRow() {
     }
 }
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 private fun UnderlinedIndicatorTabRow() {
     var selectedTabIndex by remember { mutableIntStateOf(0) }
@@ -130,12 +127,8 @@ private fun UnderlinedIndicatorTabRow() {
 
 @Composable
 private fun TabPanels(selectedTabIndex: Int) {
-    var value = 0
-
     AnimatedContent(targetState = selectedTabIndex, label = "") {
-        value = it
-
-        when (selectedTabIndex) {
+        when (it) {
             getTabIndex("Search") -> {
                 Column(
                     modifier = Modifier

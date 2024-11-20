@@ -1,15 +1,15 @@
 [versions]
-agp = "8.3.1"
-coil-compose = "2.5.0"
+agp = "8.7.2"
+coil-compose = "2.7.0"
 kotlin = "1.9.0"
-core-ktx = "1.12.0"
-appcompat = "1.6.1"
-compose-bom = "2024.03.00"
-navigation-compose = "2.7.7"
-tv-foundation = "1.0.0-alpha10"
-tv-material = "1.0.0-alpha10"
-lifecycle-runtime-ktx = "2.7.0"
-activity-compose = "1.8.2"
+core-ktx = "1.15.0"
+appcompat = "1.7.0"
+compose-bom = "2024.11.00"
+navigation-compose = "2.8.4"
+tv-foundation = "1.0.0-alpha11"
+tv-material = "1.0.0"
+lifecycle-runtime-ktx = "2.8.7"
+activity-compose = "1.9.3"
 
 [libraries]
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil-compose" }
@@ -21,8 +21,9 @@ tv-foundation = { group = "androidx.tv", name = "tv-foundation", version.ref = "
 tv-material = { group = "androidx.tv", name = "tv-material", version.ref = "tv-material" }
 lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
+compose-ui = { group = 'androidx.compose.ui', name = 'ui', version = "1.7.5" }
+compose-foundation = { group = 'androidx.compose.foundation', name = 'foundation', version = "1.7.5" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-

@@ -2,7 +2,6 @@ package com.google.tv.material.catalog.colorutils
 
 import androidx.compose.ui.graphics.Color
 import androidx.tv.material3.ColorScheme
-import androidx.tv.material3.ExperimentalTvMaterial3Api
 import kotlin.math.pow
 
 
@@ -233,7 +232,6 @@ object ColorUtils {
     }
 }
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 fun Scheme.toColorScheme(): ColorScheme {
     return ColorScheme(
         primary = Color(primary),

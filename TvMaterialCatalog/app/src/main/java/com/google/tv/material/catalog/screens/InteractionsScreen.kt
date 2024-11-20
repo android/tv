@@ -15,7 +15,6 @@ import androidx.compose.ui.unit.dp
 import androidx.tv.material3.Border
 import androidx.tv.material3.ClickableSurfaceDefaults
 import androidx.tv.material3.ClickableSurfaceScale
-import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Glow
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Surface
@@ -23,7 +22,6 @@ import androidx.tv.material3.Text
 import com.google.tv.material.catalog.ExampleAction
 import com.google.tv.material.catalog.ExamplesScreenWithDottedBackground
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun InteractionsScreen() {
     val actions = listOf(

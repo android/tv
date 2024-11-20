@@ -24,7 +24,6 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
 import com.google.tv.material.catalog.ExampleAction
@@ -63,7 +62,6 @@ fun MotionScreen() {
     ExamplesScreenWithDottedBackground(actions)
 }
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 private fun StandardMotion() {
     Column(
@@ -143,7 +141,6 @@ private fun StandardMotion() {
     }
 }
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 private fun BrowseMotion() {
     Column(
@@ -223,7 +220,6 @@ private fun BrowseMotion() {
     }
 }
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 private fun EnterMotion() {
     Column(
@@ -303,7 +299,6 @@ private fun EnterMotion() {
     }
 }
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 private fun ExitMotion() {
     Column(

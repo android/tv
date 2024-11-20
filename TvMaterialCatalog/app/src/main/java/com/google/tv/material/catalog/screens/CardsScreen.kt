@@ -10,31 +10,29 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.tv.material3.Card
 import androidx.tv.material3.CardDefaults
-import androidx.tv.material3.CardLayoutDefaults
 import androidx.tv.material3.ClassicCard
 import androidx.tv.material3.CompactCard
-import androidx.tv.material3.ExperimentalTvMaterial3Api
-import androidx.tv.material3.StandardCardLayout
+import androidx.tv.material3.StandardCardContainer
 import androidx.tv.material3.Text
-import androidx.tv.material3.WideCardLayout
+import androidx.tv.material3.WideCardContainer
 import androidx.tv.material3.WideClassicCard
 import com.google.tv.material.catalog.ExampleAction
 import com.google.tv.material.catalog.ExamplesScreenWithDottedBackground
 import com.google.tv.material.catalog.R
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun CardsScreen() {
     val actions = listOf(
         ExampleAction(
             title = "Standard card",
             content = {
-                StandardCardLayout(
+                StandardCardContainer(
                     modifier = Modifier.width(180.dp),
                     imageCard = {
-                        CardLayoutDefaults.ImageCard(
-                            onClick = { },
+                        Card(
+                            onClick = {},
                             interactionSource = it,
                             colors = CardDefaults.colors(containerColor = Color.Transparent)
                         ) {
@@ -133,10 +131,10 @@ fun CardsScreen() {
         ExampleAction(
             title = "Wide standard card",
             content = {
-                WideCardLayout(
+                WideCardContainer(
                     modifier = Modifier,
                     imageCard = {
-                        CardLayoutDefaults.ImageCard(
+                        Card(
                             onClick = { },
                             interactionSource = it,
                             colors = CardDefaults.colors(containerColor = Color.Transparent)

@@ -1,5 +1,12 @@
 package com.google.tv.material.catalog
 
+val foundations = listOf(
+    Component.Color,
+    Component.Typography,
+    Component.Motion,
+    Component.Interaction,
+)
+
 val components = listOf(
     Component.Button,
     Component.Card,
@@ -7,28 +14,21 @@ val components = listOf(
     Component.ListItem,
     Component.ImmersiveList,
     Component.FeaturedCarousel,
-    Component.NavigationDrawer,
     Component.TabRow,
+)
+
+val componentsPlanned = listOf(
+    Component.NavigationDrawer,
     Component.ModalDialog,
     Component.TextField,
     Component.MediaPlayerOverlay,
 )
 
-val foundations = listOf(
-    Foundation.Color,
-    Foundation.Typography,
-    Foundation.Motion,
-    Foundation.Interaction,
-)
-
-enum class Foundation(val title: String, val imageArg: String, val routeValue: String) {
+enum class Component(val title: String, val imageArg: String, val routeValue: String) {
     Color(title = "Color", imageArg = "colors", routeValue = NavGraph.Color.routeName),
     Typography(title = "Typography", imageArg = "typography", routeValue = NavGraph.Typography.routeName),
     Motion(title = "Motion", imageArg = "motion", routeValue = NavGraph.Motion.routeName),
     Interaction(title = "Interaction", imageArg = "interaction", routeValue = NavGraph.Interaction.routeName),
-}
-
-enum class Component(val title: String, val imageArg: String, val routeValue: String) {
     Button(title = "Buttons", imageArg = "buttons", routeValue = NavGraph.Buttons.routeName),
     Card(title = "Cards", imageArg = "cards", routeValue = NavGraph.Cards.routeName),
     Chip(title = "Chips", imageArg = "chips", routeValue = NavGraph.Chips.routeName),

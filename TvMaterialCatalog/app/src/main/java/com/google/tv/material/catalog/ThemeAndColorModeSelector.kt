@@ -1,5 +1,6 @@
 package com.google.tv.material.catalog
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
@@ -25,18 +27,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.tv.foundation.PivotOffsets
-import androidx.tv.foundation.lazy.list.TvLazyColumn
-import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Icon
 import androidx.tv.material3.ListItem
 import androidx.tv.material3.MaterialTheme
-import androidx.tv.material3.NonInteractiveSurfaceDefaults
 import androidx.tv.material3.RadioButton
 import androidx.tv.material3.Surface
+import androidx.tv.material3.SurfaceDefaults
 import androidx.tv.material3.Text
 
-@OptIn(ExperimentalTvMaterial3Api::class, ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun ThemeAndColorModeSelector(
     isExpanded: Boolean,
@@ -51,6 +50,10 @@ fun ThemeAndColorModeSelector(
         if (isExpanded) {
             focusRequester.requestFocus()
         }
+    }
+
+    BackHandler(enabled = isExpanded) {
+        onClose()
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -68,10 +71,10 @@ fun ThemeAndColorModeSelector(
                         .width(300.dp)
                         .padding(12.dp)
                         .align(Alignment.End),
-                    colors = NonInteractiveSurfaceDefaults
+                    colors = SurfaceDefaults
                         .colors(containerColor = MaterialTheme.colorScheme.surface)
                 ) {
-                    TvLazyColumn(
+                    LazyColumn(
                         modifier = Modifier
                             .padding(12.dp)
                             .focusRequester(focusRequester)
@@ -80,8 +83,7 @@ fun ThemeAndColorModeSelector(
                                     onClose()
                                     FocusRequester.Default
                                 }
-                            },
-                        pivotOffsets = PivotOffsets(parentFraction = 0.2f)
+                            }
                     ) {
                         item {
                             Text(
@@ -119,11 +121,13 @@ fun ThemeAndColorModeSelector(
                                                 )
                                             },
                                             trailingContent = {
-                                                RadioButton(selected = isSelected, onClick = { })
-                                            }
-                                        ) {
-                                            Text(text = it.title)
-                                        }
+                                                RadioButton(
+                                                    selected = isSelected,
+                                                    onClick = { })
+                                            },
+                                            headlineContent = {
+                                                Text(text = it.title)
+                                            })
                                     }
                                 }
                             }
@@ -148,7 +152,8 @@ fun ThemeAndColorModeSelector(
                                     Modifier.selectableGroup()
                                 ) {
                                     seedColors.forEach {
-                                        val isSelected = LocalThemeSeedColor.current.name == it.name
+                                        val isSelected =
+                                            LocalThemeSeedColor.current.name == it.name
                                         ListItem(
                                             selected = isSelected,
                                             onClick = { onSeedColorChange(it) },
@@ -161,11 +166,13 @@ fun ThemeAndColorModeSelector(
                                                 )
                                             },
                                             trailingContent = {
-                                                RadioButton(selected = isSelected, onClick = { })
-                                            }
-                                        ) {
-                                            Text(text = it.name)
-                                        }
+                                                RadioButton(
+                                                    selected = isSelected,
+                                                    onClick = { })
+                                            },
+                                            headlineContent = {
+                                                Text(text = it.name)
+                                            })
                                     }
                                 }
                             }

@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.PlayArrow
@@ -37,7 +38,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextMotion
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.tv.foundation.lazy.list.TvLazyRow
 import androidx.tv.material3.Border
 import androidx.tv.material3.Button
 import androidx.tv.material3.ButtonDefaults
@@ -219,10 +219,9 @@ fun Modifier.carouselGradient(): Modifier = composed {
         )
 }
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun BottomCards(modifier: Modifier) {
-    TvLazyRow(
+    LazyRow(
         modifier = modifier,
         contentPadding = PaddingValues(start = 36.dp),
         horizontalArrangement = Arrangement.spacedBy(20.dp),
