@@ -6,6 +6,7 @@ androidx-baselineprofile = "1.3.1"
 benchmark-macro-junit4 = "1.3.1"
 coil-compose = "2.6.0"
 compose-bom = "2024.09.02"
+compose-runtime = "1.7.6"
 tv-material = "1.0.0"
 core-ktx = "1.13.1"
 core-splashscreen = "1.0.1"
@@ -27,6 +28,7 @@ rules = "1.6.1"
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
 androidx-benchmark-macro-junit4 = { module = "androidx.benchmark:benchmark-macro-junit4", version.ref = "benchmark-macro-junit4" }
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
+androidx-compose-runtime-base = { module = "androidx.compose.runtime:runtime", version.ref = "compose-runtime" }
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
