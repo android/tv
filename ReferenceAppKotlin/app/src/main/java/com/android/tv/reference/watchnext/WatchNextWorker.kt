@@ -39,8 +39,6 @@ class WatchNextWorker(private val context: Context, params: WorkerParameters) :
      * Events triggered from player state change events &
      * playback lifecycle events (onPause) are consumed here.
      */
-    @SuppressLint("RestrictedApi")
-    // Suppress RestrictedApi due to https://b.corp.google.com/issues/138150076
     override fun doWork(): Result {
 
         // Step 1 : get the video information from the "inputData".
