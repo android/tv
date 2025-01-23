@@ -30,6 +30,7 @@ import com.android.tv.reference.deeplink.DeepLinkViewModel
 import com.android.tv.reference.deeplink.DeepLinkViewModelFactory
 import com.android.tv.reference.shared.datamodel.Video
 import com.android.tv.reference.shared.util.Result
+import com.android.tv.reference.watchnext.Publisher
 import timber.log.Timber
 
 /**
@@ -145,5 +146,10 @@ class MainActivity : FragmentActivity() {
                 video
             )
         )
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Publisher.publishPeriodically(applicationContext)
     }
 }

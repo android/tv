@@ -120,7 +120,7 @@ object WatchNextHelper {
      * whichever timestamp is earlier.
      * https://developer.android.com/training/tv/discovery/guidelines-app-developers
      */
-    private fun hasVideoStarted(duration: Duration, currentPosition: Int): Boolean {
+    internal fun hasVideoStarted(duration: Duration, currentPosition: Int): Boolean {
         val durationInMilliSeconds = duration.toMillis().toInt()
         // Return true if either X minutes or Y % have passed
         // Following formatting spans over multiple lines to accommodate max 100 limit
