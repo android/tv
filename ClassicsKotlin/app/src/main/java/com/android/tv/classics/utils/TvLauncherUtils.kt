@@ -16,7 +16,6 @@
 
 package com.android.tv.classics.utils
 
-import android.annotation.SuppressLint
 import android.content.ContentResolver
 import android.content.Context
 import android.content.res.Resources
@@ -37,7 +36,6 @@ import com.android.tv.classics.models.TvMediaCollection
 
 /** Collection of static methods used to handle Android TV Home Screen Launcher operations */
 @RequiresApi(26)
-@SuppressLint("RestrictedApi")
 class TvLauncherUtils private constructor() {
     companion object {
         private val TAG = TvLauncherUtils::class.java.simpleName
