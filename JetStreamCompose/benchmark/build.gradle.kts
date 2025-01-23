@@ -63,6 +63,7 @@ baselineProfile {
 
 
 dependencies {
+    implementation(libs.androidx.compose.runtime.base)
     implementation(libs.androidx.junit)
     implementation(libs.androidx.uiautomator)
 
