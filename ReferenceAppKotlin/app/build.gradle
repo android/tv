@@ -122,6 +122,9 @@ dependencies {
     implementation("com.squareup.moshi:moshi-kotlin:1.13.0")
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.13.0")
 
+    // Engage SDK
+    implementation "com.google.android.engage:engage-core:1.4.0"
+
     // Retrofit for HTTP requests
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'

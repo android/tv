@@ -46,19 +46,40 @@ class WatchNextPlaybackStateListener(private val context: Context) : PlaybackSta
 
         // Set relevant data about playback state and video.
         val watchData = Data.Builder().apply {
-            putString(WatchNextHelper.VIDEO_ID, video.id)
-            putLong(WatchNextHelper.CURRENT_POSITION, position)
-            putLong(WatchNextHelper.DURATION, video.duration().toMillis())
-            putString(WatchNextHelper.PLAYER_STATE, playerState)
+            putString(Constants.PUBLISH_TYPE, Constants.PUBLISH_TYPE_CONTINUATION)
         }.build()
+
+        EngageWatchNextService.getInstance(context).handleVideoPlaybackStateChange(
+            videoId = video.id,
+            currentWatchPosition = position,
+            playerState = playerState,
+        )
 
         // Run on a background thread to process playback states and do relevant operations for
         // Watch Next.
-        Timber.d("Trigger WorkManager with updated watchData $watchData")
-        WorkManager.getInstance(context.applicationContext).enqueue(
-            OneTimeWorkRequest.Builder(WatchNextWorker::class.java)
-                .setInputData(watchData)
-                .build()
-        )
+        Timber.d("Trigger WorkManager with updated watchData $watchData using Engage SDK")
+        WorkManager.getInstance(context.applicationContext)
+            .enqueue(
+                OneTimeWorkRequest.Builder(EngageServiceWorker::class.java)
+                    .setInputData(watchData)
+                    .build()
+            )
+
+        // Set relevant data about playback state and video.
+//        val watchData = Data.Builder().apply {
+//            putString(WatchNextHelper.VIDEO_ID, video.id)
+//            putLong(WatchNextHelper.CURRENT_POSITION, position)
+//            putLong(WatchNextHelper.DURATION, video.duration().toMillis())
+//            putString(WatchNextHelper.PLAYER_STATE, playerState)
+//        }.build()
+
+        // Run on a background thread to process playback states and do relevant operations for
+        // Watch Next.
+//        Timber.d("Trigger WorkManager with updated watchData $watchData using TvProvider")
+//        WorkManager.getInstance(context.applicationContext).enqueue(
+//            OneTimeWorkRequest.Builder(WatchNextWorker::class.java)
+//                .setInputData(watchData)
+//                .build()
+//        )
     }
 }
