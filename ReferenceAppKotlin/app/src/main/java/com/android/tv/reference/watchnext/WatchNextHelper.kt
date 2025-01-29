@@ -143,8 +143,6 @@ object WatchNextHelper {
     /**
      * Retrieve all programs in Watch Next row.
      */
-    @SuppressLint("RestrictedApi")
-    // Suppress RestrictedApi due to https://issuetracker.google.com/138150076
     internal fun getWatchNextPrograms(context: Context): List<WatchNextProgram> {
         val programs: MutableList<WatchNextProgram> = mutableListOf()
         val cursor = context.contentResolver.query(
@@ -169,8 +167,6 @@ object WatchNextHelper {
      * Add unfinished program to Watch Next.
      * Update the playback position if program already exists in Watch Next channel.
      */
-    @SuppressLint("RestrictedApi")
-    // Suppress RestrictedApi due to https://issuetracker.google.com/138150076
     @Synchronized
     internal fun insertOrUpdateVideoToWatchNext(
         video: Video,
@@ -247,8 +243,6 @@ object WatchNextHelper {
      *  Returns the number of rows deleted or null if delete fails
      */
     @Synchronized
-    @SuppressLint("RestrictedApi")
-    // Suppress RestrictedApi due to https://issuetracker.google.com/138150076
     fun removeVideoFromWatchNext(context: Context, video: Video): Uri? {
         Timber.v("Trying to Removing content from Watch Next: ${video.name}")
 
@@ -280,8 +274,6 @@ object WatchNextHelper {
     }
 
     @Synchronized
-    @SuppressLint("RestrictedApi")
-    // Suppress RestrictedApi due to https://issuetracker.google.com/138150076
     fun removeVideosFromWatchNext(context: Context, videos: List<Video>) {
         // Find the program with the matching ID for our metadata.
         val foundPrograms = getWatchNextProgramByVideoIds(videos.map { it.id }, context)
@@ -311,8 +303,6 @@ object WatchNextHelper {
     }
 
     @Synchronized
-    @SuppressLint("RestrictedApi")
-    // Suppress RestrictedApi due to https://issuetracker.google.com/138150076
     private fun getWatchNextProgramByVideoIds(ids: List<String>, context: Context):
         List<WatchNextProgram> {
         return getWatchNextPrograms(context).filter {
@@ -324,8 +314,6 @@ object WatchNextHelper {
      * Find the Watch Next program for given id.
      * Returns the first instance available.
      */
-    @SuppressLint("RestrictedApi")
-    // Suppress RestrictedApi due to https://issuetracker.google.com/138150076
     internal fun findFirstWatchNextProgram(context: Context, predicate: (Cursor) -> Boolean):
         WatchNextProgram? {
 
@@ -351,7 +339,6 @@ object WatchNextHelper {
     /**
      *  Returns a list of videos which is visible on Watch Next row.
      */
-    @SuppressLint("RestrictedApi")
     internal fun filterWatchNextVideos(videos: List<Video>, context: Context): List<Video> {
         val watchedPrograms = getWatchNextProgramByVideoIds(videos.map { it.id }, context)
         val watchedVideosIds = watchedPrograms.map { it.internalProviderId }

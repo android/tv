@@ -398,20 +398,24 @@ class WatchNextTest {
             // Insert a new row.
             rowId++
 
-            val programBuilder = WatchNextProgram.Builder()
-                .setId(rowId)
-                .setTitle(values?.getAsString(TvContractCompat.WatchNextPrograms.COLUMN_TITLE))
-                .setInternalProviderId(
-                    values?.getAsString(
-                        TvContractCompat.WatchNextPrograms
-                            .COLUMN_INTERNAL_PROVIDER_ID
-                    )
-                )
-                .setLastPlaybackPositionMillis(
-                    values!!.getAsInteger(
-                        TvContractCompat.WatchNextPrograms.COLUMN_LAST_PLAYBACK_POSITION_MILLIS
-                    )
-                )
+            val programBuilder =
+                values?.getAsString(TvContractCompat.WatchNextPrograms.COLUMN_TITLE)?.let {
+                    WatchNextProgram.Builder()
+                        .setId(rowId)
+                        .setTitle(it)
+                        .setInternalProviderId(
+                            values.getAsString(
+                                TvContractCompat.WatchNextPrograms
+                                    .COLUMN_INTERNAL_PROVIDER_ID
+                            )
+                        )
+                        .setLastPlaybackPositionMillis(
+                            values!!.getAsInteger(
+                                TvContractCompat.WatchNextPrograms.COLUMN_LAST_PLAYBACK_POSITION_MILLIS
+                            )
+                        )
+                }
+
 
             values.getAsInteger(
                 TvContractCompat.WatchNextPrograms.COLUMN_SEASON_DISPLAY_NUMBER
@@ -483,26 +487,31 @@ class WatchNextTest {
         ): Int {
             val id = uri.lastPathSegment?.toLong() ?: return 0
 
-            val program = WatchNextProgram.Builder()
-                .setId(id)
-                .setTitle(values?.getAsString(TvContractCompat.WatchNextPrograms.COLUMN_TITLE))
-                .setInternalProviderId(
-                    values?.getAsString(
-                        TvContractCompat
-                            .WatchNextPrograms.COLUMN_INTERNAL_PROVIDER_ID
+            val program = values?.getAsString(
+                TvContractCompat
+                    .WatchNextPrograms.COLUMN_INTERNAL_PROVIDER_ID
+            )?.let {
+                WatchNextProgram.Builder()
+                    .setId(id)
+                    .setTitle(values.getAsString(TvContractCompat.WatchNextPrograms.COLUMN_TITLE))
+                    .setInternalProviderId(
+                        it
                     )
-                )
-                .setLastPlaybackPositionMillis(
-                    values!!.getAsInteger(
-                        TvContractCompat.WatchNextPrograms.COLUMN_LAST_PLAYBACK_POSITION_MILLIS
+                    .setLastPlaybackPositionMillis(
+                        values.getAsInteger(
+                            TvContractCompat.WatchNextPrograms.COLUMN_LAST_PLAYBACK_POSITION_MILLIS
+                        )
+
                     )
-                )
-                .build()
+                    .build()
+            }
 
             // Since kotlin collections don't directly provide a replace function, for testing
             // purpose, remove existing and add new entry to avoid complexity.
             this.valuesInMemory.removeIf { it.id == id }
-            this.valuesInMemory.add(program)
+            if (program != null) {
+                this.valuesInMemory.add(program)
+            }
             return 1
         }
 
