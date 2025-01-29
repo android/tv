@@ -16,7 +16,6 @@
 
 package com.android.tv.classics.receivers
 
-import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -104,7 +103,6 @@ class TvLauncherReceiver : BroadcastReceiver() {
      * Helper method used to retrieve a metadata item object given its program ID. Restricted API
      * is being used to compared programs based on their ID.
      */
-    @SuppressLint("RestrictedApi")
     private fun getMediaItemFromProgramId(
             context: Context, db: TvMediaDatabase, programId: Long?): TvMediaMetadata? {
 
@@ -112,12 +110,14 @@ class TvLauncherReceiver : BroadcastReceiver() {
         if (programId == null) return null
 
         // Retrieve the program that matches this ID
-        val programItem =
-                TvLauncherUtils.getPreviewPrograms(context).find { it.id == programId } ?:
-                TvLauncherUtils.getWatchNextPrograms(context).find { it.id == programId }
-
+        val previewProgramItem =
+                TvLauncherUtils.getPreviewPrograms(context).find { it.id == programId }
         // Retrieve the corresponding metadata item and return
-        return programItem?.let { db.metadata().findById(it.contentId) }
+        if(previewProgramItem != null)
+            return previewProgramItem.let { db.metadata().findById(it.contentId) }
+        // Retrieve the corresponding metadata item and return
+        val watchNextProgramItem = TvLauncherUtils.getWatchNextPrograms(context).find { it.id == programId }
+        return watchNextProgramItem?.let { db.metadata().findById(it.contentId) }
     }
 
     companion object {
